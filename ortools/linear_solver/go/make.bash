@@ -1,2 +1,3 @@
 #!/bin/bash
-swig -c++ -go -intgosize 64 -module gowraplp linear_solver.i
+INC_DIR=../../../
+swig -I$INC_DIR -c++ -go -intgosize 64 -module gowraplp linear_solver.i
