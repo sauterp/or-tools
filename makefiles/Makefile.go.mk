@@ -45,3 +45,20 @@ GO_OR_TOOLS_LIBS = \
  $(GOSAT_LIBS) \
  $(GODATA_LIBS) \
  $(GOSORTED_INTERVAL_LIST_LIBS)
+
+# Main target
+.PHONY: go # Build Go OR-Tools.
+.PHONY: check_go # Quick check only running Go OR-Tools samples.
+.PHONY: test_go # Run all Go OR-Tools test targets.
+ifneq ($(GO_EXECUTABLE),)
+go: $(GO_OR_TOOLS_LIBS)
+check_go: check_go_pimpl
+test_go: test_go_pimpl
+BUILT_LANGUAGES +=, Go$(GO_VERSION)
+else
+go:
+	@echo GO_EXECUTABLE = "${GO_EXECUTABLE}"
+	$(warning Cannot find '$(GO_COMPILER)' command which is needed for build. Please make sure it is installed and in system path.)
+check_go: go
+test_go: go
+endif
