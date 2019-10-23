@@ -73,7 +73,7 @@ ifeq ($(PLATFORM),MACOSX)
 GOALGORITHMS_LDFLAGS = -install_name @rpath/_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/algorithms/pywrapknapsack_solver.py: \
+$(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/algorithms/go/knapsack_solver.i \
@@ -86,7 +86,7 @@ $(GEN_DIR)/ortools/algorithms/pywrapknapsack_solver.py: \
  ortools$Salgorithms$Sgo$Sknapsack_solver.i
 
 $(GEN_DIR)/ortools/algorithms/knapsack_solver_go_wrap.cc: \
- $(GEN_DIR)/ortools/algorithms/pywrapknapsack_solver.py
+ $(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go
 
 $(OBJ_DIR)/swig/knapsack_solver_go_wrap.$O: \
  $(GEN_DIR)/ortools/algorithms/knapsack_solver_go_wrap.cc \
@@ -106,7 +106,7 @@ $(GOALGORITHMS_LIBS): $(OBJ_DIR)/swig/knapsack_solver_go_wrap.$O $(OR_TOOLS_LIBS
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\algorithms\\_pywrapknapsack_solver.pyd
+	copy $(LIB_DIR)$S_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\algorithms\\_gowrapknapsack_solver.pyd
 else
 	cp $(GOALGORITHMS_LIBS) $(GEN_PATH)/ortools/algorithms
 endif
@@ -116,7 +116,7 @@ ifeq ($(PLATFORM),MACOSX)
 GOGRAPH_LDFLAGS = -install_name @rpath/_gowrapgraph.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/graph/pywrapgraph.py: \
+$(GEN_DIR)/ortools/graph/gowrapgraph.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/graph/go/graph.i \
@@ -132,7 +132,7 @@ $(GEN_DIR)/ortools/graph/pywrapgraph.py: \
  ortools$Sgraph$Sgo$Sgraph.i
 
 $(GEN_DIR)/ortools/graph/graph_go_wrap.cc: \
- $(GEN_DIR)/ortools/graph/pywrapgraph.py
+ $(GEN_DIR)/ortools/graph/gowrapgraph.go
 
 $(OBJ_DIR)/swig/graph_go_wrap.$O: \
  $(GEN_DIR)/ortools/graph/graph_go_wrap.cc \
@@ -152,7 +152,7 @@ $(GOGRAPH_LIBS): $(OBJ_DIR)/swig/graph_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowrapgraph.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\graph\\_pywrapgraph.pyd
+	copy $(LIB_DIR)$S_gowrapgraph.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\graph\\_gowrapgraph.pyd
 else
 	cp $(GOGRAPH_LIBS) $(GEN_PATH)/ortools/graph
 endif
@@ -162,55 +162,55 @@ ifeq ($(PLATFORM),MACOSX)
 GOCP_LDFLAGS = -install_name @rpath/_gowrapcp.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/constraint_solver/search_limit_pb2.py: \
+$(GEN_DIR)/ortools/constraint_solver/search_limit_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/search_limit.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Ssearch_limit.proto
 
-$(GEN_DIR)/ortools/constraint_solver/assignment_pb2.py: \
+$(GEN_DIR)/ortools/constraint_solver/assignment_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/assignment.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Sassignment.proto
 
-$(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.py: \
+$(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/solver_parameters.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Ssolver_parameters.proto
 
-$(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.py: \
+$(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/routing_enums.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Srouting_enums.proto
 
-$(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.py: \
+$(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/routing_parameters.proto \
- $(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.py \
- $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.py \
+ $(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.go \
+ $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Srouting_parameters.proto
 
-$(GEN_DIR)/ortools/constraint_solver/pywrapcp.py: \
+$(GEN_DIR)/ortools/constraint_solver/gowrapcp.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/constraint_solver/go/constraint_solver.i \
  $(SRC_DIR)/ortools/constraint_solver/go/routing.i \
  $(SRC_DIR)/ortools/constraint_solver/constraint_solver.h \
  $(SRC_DIR)/ortools/constraint_solver/constraint_solveri.h \
- $(GEN_DIR)/ortools/constraint_solver/assignment_pb2.py \
- $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.py \
- $(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.py \
- $(GEN_DIR)/ortools/constraint_solver/search_limit_pb2.py \
- $(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.py \
+ $(GEN_DIR)/ortools/constraint_solver/assignment_pb2.go \
+ $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.go \
+ $(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.go \
+ $(GEN_DIR)/ortools/constraint_solver/search_limit_pb2.go \
+ $(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.go \
  $(GEN_DIR)/ortools/constraint_solver/assignment.pb.h \
  $(GEN_DIR)/ortools/constraint_solver/search_limit.pb.h \
  $(CP_LIB_OBJS) \
@@ -230,7 +230,7 @@ $(GEN_DIR)/ortools/constraint_solver/pywrapcp.py: \
  $(GEN_PATH)$Sortools$Sconstraint_solver$Sconstraint_solver_go_wrap.cc
 
 $(GEN_DIR)/ortools/constraint_solver/constraint_solver_go_wrap.cc: \
- $(GEN_DIR)/ortools/constraint_solver/pywrapcp.py
+ $(GEN_DIR)/ortools/constraint_solver/gowrapcp.go
 
 $(OBJ_DIR)/swig/constraint_solver_go_wrap.$O: \
  $(GEN_DIR)/ortools/constraint_solver/constraint_solver_go_wrap.cc \
@@ -250,7 +250,7 @@ $(GOCP_LIBS): $(OBJ_DIR)/swig/constraint_solver_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowrapcp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\constraint_solver\\_pywrapcp.pyd
+	copy $(LIB_DIR)$S_gowrapcp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\constraint_solver\\_gowrapcp.pyd
 else
 	cp $(GOCP_LIBS) $(GEN_PATH)/ortools/constraint_solver
 endif
@@ -260,28 +260,28 @@ ifeq ($(PLATFORM),MACOSX)
 GOLP_LDFLAGS = -install_name @rpath/_gowraplp.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/util/optional_boolean_pb2.py: \
+$(GEN_DIR)/ortools/util/optional_boolean_pb2.go: \
  $(SRC_DIR)/ortools/util/optional_boolean.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/util
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/util/optional_boolean.proto
 
-$(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.py: \
+$(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go: \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.proto \
- $(GEN_DIR)/ortools/util/optional_boolean_pb2.py \
+ $(GEN_DIR)/ortools/util/optional_boolean_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/linear_solver
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.proto
 
-$(GEN_DIR)/ortools/linear_solver/pywraplp.py: \
+$(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.h \
  $(GEN_DIR)/ortools/linear_solver/linear_solver.pb.h \
- $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.py \
+ $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/linear_solver
 	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
@@ -290,7 +290,7 @@ $(GEN_DIR)/ortools/linear_solver/pywraplp.py: \
  $(SRC_DIR)/ortools/linear_solver$Sgo$Slinear_solver.i
 
 $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
- $(GEN_DIR)/ortools/linear_solver/pywraplp.py
+ $(GEN_DIR)/ortools/linear_solver/gowraplp.go
 
 $(OBJ_DIR)/swig/linear_solver_go_wrap.$O: \
  $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc \
@@ -310,7 +310,7 @@ $(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_pywraplp.pyd
+	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.pyd
 else
 	cp $(GOLP_LIBS) $(GEN_PATH)/ortools/linear_solver
 endif
@@ -320,26 +320,26 @@ ifeq ($(PLATFORM),MACOSX)
 GOSAT_LDFLAGS = -install_name @rpath/_gowrapsat.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/sat/cp_model_pb2.py: \
+$(GEN_DIR)/ortools/sat/cp_model_pb2.go: \
  $(SRC_DIR)/ortools/sat/cp_model.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/sat/cp_model.proto
 
-$(GEN_DIR)/ortools/sat/sat_parameters_pb2.py: \
+$(GEN_DIR)/ortools/sat/sat_parameters_pb2.go: \
  $(SRC_DIR)/ortools/sat/sat_parameters.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/sat/sat_parameters.proto
 
-$(GEN_DIR)/ortools/sat/pywrapsat.py: \
+$(GEN_DIR)/ortools/sat/gowrapsat.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/sat/go/sat.i \
- $(GEN_DIR)/ortools/sat/cp_model_pb2.py \
- $(GEN_DIR)/ortools/sat/sat_parameters_pb2.py \
+ $(GEN_DIR)/ortools/sat/cp_model_pb2.go \
+ $(GEN_DIR)/ortools/sat/sat_parameters_pb2.go \
  $(SAT_DEPS) \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
@@ -349,7 +349,7 @@ $(GEN_DIR)/ortools/sat/pywrapsat.py: \
  $(SRC_DIR)/ortools/sat$Sgo$Ssat.i
 
 $(GEN_DIR)/ortools/sat/sat_go_wrap.cc: \
- $(GEN_DIR)/ortools/sat/pywrapsat.py
+ $(GEN_DIR)/ortools/sat/gowrapsat.go
 
 $(OBJ_DIR)/swig/sat_go_wrap.$O: \
  $(GEN_DIR)/ortools/sat/sat_go_wrap.cc \
@@ -369,7 +369,7 @@ $(GOSAT_LIBS): $(OBJ_DIR)/swig/sat_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowrapsat.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\sat\\_pywrapsat.pyd
+	copy $(LIB_DIR)$S_gowrapsat.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\sat\\_gowrapsat.pyd
 else
 	cp $(GOSAT_LIBS) $(GEN_PATH)/ortools/sat
 endif
@@ -379,18 +379,18 @@ ifeq ($(PLATFORM),MACOSX)
 GORCPSP_LDFLAGS = -install_name @rpath/_gowraprcpsp.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/data/rcpsp_pb2.py: \
+$(GEN_DIR)/ortools/data/rcpsp_pb2.go: \
  $(SRC_DIR)/ortools/data/rcpsp.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/data
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/data/rcpsp.proto
 
-$(GEN_DIR)/ortools/data/pywraprcpsp.py: \
+$(GEN_DIR)/ortools/data/gowraprcpsp.go: \
  $(SRC_DIR)/ortools/data/rcpsp_parser.h \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/data/go/rcpsp.i \
- $(GEN_DIR)/ortools/data/rcpsp_pb2.py \
+ $(GEN_DIR)/ortools/data/rcpsp_pb2.go \
  $(DATA_DEPS) \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/data
@@ -400,7 +400,7 @@ $(GEN_DIR)/ortools/data/pywraprcpsp.py: \
  $(SRC_DIR)/ortools/data$Sgo$Srcpsp.i
 
 $(GEN_DIR)/ortools/data/rcpsp_go_wrap.cc: \
- $(GEN_DIR)/ortools/data/pywraprcpsp.py
+ $(GEN_DIR)/ortools/data/gowraprcpsp.go
 
 $(OBJ_DIR)/swig/rcpsp_go_wrap.$O: \
  $(GEN_DIR)/ortools/data/rcpsp_go_wrap.cc \
@@ -420,7 +420,7 @@ $(GODATA_LIBS): $(OBJ_DIR)/swig/rcpsp_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowraprcpsp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\data\\_pywraprcpsp.pyd
+	copy $(LIB_DIR)$S_gowraprcpsp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\data\\_gowraprcpsp.pyd
 else
 	cp $(GODATA_LIBS) $(GEN_PATH)/ortools/data
 endif
@@ -430,7 +430,7 @@ ifeq ($(PLATFORM),MACOSX)
 GOSORTED_INTERVAL_LIST_LDFLAGS = -install_name @rpath/_sorted_interval_list.$(SWIG_GO_LIB_SUFFIX) #
 endif
 
-$(GEN_DIR)/ortools/util/sorted_interval_list.py: \
+$(GEN_DIR)/ortools/util/sorted_interval_list.go: \
  $(SRC_DIR)/ortools/util/sorted_interval_list.h \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/util/go/vector.i \
@@ -445,7 +445,7 @@ $(GEN_DIR)/ortools/util/sorted_interval_list.py: \
  $(GEN_PATH)$Sortools$Sutil$Ssorted_interval_list_go_wrap.cc
 
 $(GEN_DIR)/ortools/util/sorted_interval_list_go_wrap.cc: \
- $(GEN_DIR)/ortools/util/sorted_interval_list.py
+ $(GEN_DIR)/ortools/util/sorted_interval_list.go
 
 $(OBJ_DIR)/swig/sorted_interval_list_go_wrap.$O: \
  $(GEN_DIR)/ortools/util/sorted_interval_list_go_wrap.cc \
