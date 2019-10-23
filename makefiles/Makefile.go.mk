@@ -36,15 +36,21 @@ GOLP_LIBS = $(LIB_DIR)/_gowraplp.$(SWIG_GO_LIB_SUFFIX)
 GOSAT_LIBS = $(LIB_DIR)/_gowrapsat.$(SWIG_GO_LIB_SUFFIX)
 GODATA_LIBS = $(LIB_DIR)/_gowraprcpsp.$(SWIG_GO_LIB_SUFFIX)
 GOSORTED_INTERVAL_LIST_LIBS = $(LIB_DIR)/_sorted_interval_list.$(SWIG_GO_LIB_SUFFIX)
+
+# TODO build the full list of libraries
+# GO_OR_TOOLS_LIBS = \
+#  $(GEN_DIR)/ortools/ \
+#  $(GOALGORITHMS_LIBS) \
+#  $(GOGRAPH_LIBS) \
+#  $(GOCP_LIBS) \
+#  $(GOLP_LIBS) \
+#  $(GOSAT_LIBS) \
+#  $(GODATA_LIBS) \
+#  $(GOSORTED_INTERVAL_LIST_LIBS)
+
 GO_OR_TOOLS_LIBS = \
  $(GEN_DIR)/ortools/ \
- $(GOALGORITHMS_LIBS) \
- $(GOGRAPH_LIBS) \
- $(GOCP_LIBS) \
- $(GOLP_LIBS) \
- $(GOSAT_LIBS) \
- $(GODATA_LIBS) \
- $(GOSORTED_INTERVAL_LIST_LIBS)
+ $(GOLP_LIBS)
 
 # Main target
 .PHONY: go # Build Go OR-Tools.
@@ -275,9 +281,10 @@ $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go: \
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.proto
 
+# TODO implement $(SRC_DIR)/ortools/util/go/vector.i
+#  $(SRC_DIR)/ortools/util/go/vector.i \
 $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/base/base.i \
- $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.h \
  $(GEN_DIR)/ortools/linear_solver/linear_solver.pb.h \
