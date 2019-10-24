@@ -172,28 +172,28 @@ $(GEN_DIR)/ortools/constraint_solver/search_limit_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/search_limit.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Ssearch_limit.proto
 
 $(GEN_DIR)/ortools/constraint_solver/assignment_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/assignment.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Sassignment.proto
 
 $(GEN_DIR)/ortools/constraint_solver/solver_parameters_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/solver_parameters.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Ssolver_parameters.proto
 
 $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.go: \
  $(SRC_DIR)/ortools/constraint_solver/routing_enums.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Srouting_enums.proto
 
 $(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.go: \
@@ -202,7 +202,7 @@ $(GEN_DIR)/ortools/constraint_solver/routing_parameters_pb2.go: \
  $(GEN_DIR)/ortools/constraint_solver/routing_enums_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)$Sortools$Sconstraint_solver$Srouting_parameters.proto
 
 $(GEN_DIR)/ortools/constraint_solver/gowrapcp.go: \
@@ -270,7 +270,7 @@ $(GEN_DIR)/ortools/util/optional_boolean_pb2.go: \
  $(SRC_DIR)/ortools/util/optional_boolean.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/util
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/util/optional_boolean.proto
 
 $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go: \
@@ -278,11 +278,11 @@ $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go: \
  $(GEN_DIR)/ortools/util/optional_boolean_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/linear_solver
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.proto
 
 # TODO implement $(SRC_DIR)/ortools/util/go/vector.i
-#  $(SRC_DIR)/ortools/util/go/vector.i \
+#  $(SRC_DIR)/ortools/util/go/vector.i
 $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/base/base.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
@@ -331,14 +331,14 @@ $(GEN_DIR)/ortools/sat/cp_model_pb2.go: \
  $(SRC_DIR)/ortools/sat/cp_model.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/sat/cp_model.proto
 
 $(GEN_DIR)/ortools/sat/sat_parameters_pb2.go: \
  $(SRC_DIR)/ortools/sat/sat_parameters.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/sat/sat_parameters.proto
 
 $(GEN_DIR)/ortools/sat/gowrapsat.go: \
@@ -390,7 +390,7 @@ $(GEN_DIR)/ortools/data/rcpsp_pb2.go: \
  $(SRC_DIR)/ortools/data/rcpsp.proto \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/data
-	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) $(MYPY_OUT) \
+	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/data/rcpsp.proto
 
 $(GEN_DIR)/ortools/data/gowraprcpsp.go: \
