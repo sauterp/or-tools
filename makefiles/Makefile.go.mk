@@ -28,6 +28,8 @@ GO_EXECUTABLE := $(shell which $(GO_COMPILER))
 SET_GOPATH = GOPATH=$(OR_TOOLS_GOPATH) # TODO set the correct GOPATH
 endif
 
+SWIG_GO_FLAG := -intgosize 64
+
 # All libraries and dependecies
 GOALGORITHMS_LIBS = $(LIB_DIR)/_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX)
 GOGRAPH_LIBS = $(LIB_DIR)/_gowrapgraph.$(SWIG_GO_LIB_SUFFIX)
