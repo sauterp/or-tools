@@ -32,6 +32,9 @@ syntax = "proto2";
 option java_package = "com.google.ortools.linearsolver";
 option java_multiple_files = true;
 
+// TODO automatically set this option in makefiles/Makefile.go.mk
+option go_package = "github.com/sauterp/or-tools/ortools/gen/ortools/linear_solver";
+
 // import "google/protobuf/wrappers.proto";
 import "ortools/util/optional_boolean.proto";
 

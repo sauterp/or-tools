@@ -17,6 +17,9 @@ option java_package = "com.google.ortools.util";
 option java_multiple_files = true;
 option csharp_namespace = "Google.OrTools.Util";
 
+// TODO automatically set this option in makefiles/Makefile.go.mk
+option go_package = "github.com/sauterp/or-tools/ortools/gen/ortools/util";
+
 package operations_research;
 
 // A "three-way" boolean: unspecified, false or true.

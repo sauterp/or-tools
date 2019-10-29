@@ -28,7 +28,7 @@ GO_EXECUTABLE := $(shell which $(GO_COMPILER))
 SET_GOPATH = GOPATH=$(OR_TOOLS_GOPATH) # TODO set the correct GOPATH
 endif
 
-SWIG_GO_FLAG := -intgosize 64
+SWIG_GO_FLAG := -intgosize 64 -package linear_solver
 
 # All libraries and dependecies
 GOALGORITHMS_LIBS = $(LIB_DIR)/_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX)
@@ -494,6 +494,61 @@ endif
 ################
 ##  Cleaning  ##
 ################
+.PHONY: clean_go # Clean Go output from previous build.
+clean_go:
+	-$(DEL) $(GEN_PATH)$Sortools$Salgorithms$S*.go
+	-$(DEL) $(GEN_PATH)$Sortools$Salgorithms$S*.cc
+	-$(DEL) $(GEN_PATH)$Sortools$Salgorithms$S*.h
+	-$(DEL) $(GEN_PATH)$Sortools$Salgorithms$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Salgorithms$S_pywrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Sgraph$S*.py
+	-$(DEL) $(GEN_PATH)$Sortools$Sgraph$S*.pyc
+	-$(DEL) ortools$Sgraph$S*.pyc
+	-$(DEL) $(GEN_PATH)$Sortools$Sgraph$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Sgraph$S_pywrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Sconstraint_solver$S*.py
+	-$(DEL) $(GEN_PATH)$Sortools$Sconstraint_solver$S*.pyc
+	-$(DEL) ortools$Sconstraint_solver$S*.pyc
+	-$(DEL) $(GEN_PATH)$Sortools$Sconstraint_solver$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Sconstraint_solver$S_pywrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Slinear_solver$S*.go
+	-$(DEL) $(GEN_PATH)$Sortools$Slinear_solver$S*.cc
+	-$(DEL) $(GEN_PATH)$Sortools$Slinear_solver$S*.h
+	-$(DEL) $(GEN_PATH)$Sortools$Slinear_solver$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Slinear_solver$S_gowrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Ssat$S*.py
+	-$(DEL) $(GEN_PATH)$Sortools$Ssat$S*.pyc
+	-$(DEL) ortools$Ssat$S*.pyc
+	-$(DEL) ortools$Ssat$Sgo$S*.pyc
+	-$(DEL) $(GEN_PATH)$Sortools$Ssat$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Ssat$S_pywrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Sdata$S*.py
+	-$(DEL) $(GEN_PATH)$Sortools$Sdata$S*.pyc
+	-$(DEL) ortools$Sdata$S*.pyc
+	-$(DEL) $(GEN_PATH)$Sortools$Sdata$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Sdata$S_pywrap*
+	-$(DEL) $(GEN_PATH)$Sortools$Sutil$S*.py
+	-$(DEL) $(GEN_PATH)$Sortools$Sutil$S*.pyc
+	-$(DEL) ortools$Sutil$S*.pyc
+	-$(DEL) $(GEN_PATH)$Sortools$Sutil$S*_go_wrap.*
+	-$(DEL) $(GEN_PATH)$Sortools$Sutil$S_*
+	-$(DEL) $(LIB_DIR)$S_*.$(SWIG_PYTHON_LIB_SUFFIX)
+	-$(DEL) $(OBJ_DIR)$Sswig$S*go_wrap.$O
+	-$(DELREC) temp_go*
+
+################
+## Installing ##
+################
+
+# TODO add dependencies for target install_go
+.PHONY: install_go # Install Go OR-Tools on the host system
+install_go:
+	cd $(GEN_DIR)/ortools/linear_solver/ && go install
+
+# TODO implement this
+.PHONY: uninstall_go # Uninstall Go OR-Tools from the host system
+uninstall_go:
+	"$(PYTHON_EXECUTABLE)" -m pip uninstall ortools
 
 # TODO imitate section from Makefile.python.mk
 #############
