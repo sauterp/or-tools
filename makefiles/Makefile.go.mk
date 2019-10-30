@@ -283,10 +283,9 @@ $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go: \
 	$(PROTOC) --proto_path=$(INC_DIR) --go_out=$(GEN_PATH) \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.proto
 
-# TODO implement $(SRC_DIR)/ortools/util/go/vector.i
-#  $(SRC_DIR)/ortools/util/go/vector.i
 $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/base/base.i \
+ $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.h \
  $(GEN_DIR)/ortools/linear_solver/linear_solver.pb.h \

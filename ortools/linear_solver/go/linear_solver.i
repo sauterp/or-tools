@@ -1,21 +1,13 @@
 // This is an attempt at implementing a SWIG interface to linear_solver and it copies from and imitates ../python.linear_solver.i
 
+%include "typemaps.i"
+
 %include "std_string.i"
 %include "stdint.i"
 
 %include "ortools/base/base.i"
 
-%include "std_vector.i"
-
-namespace std {
-  %template(IntVector) vector<int>;
-  %template(Float32Vector) vector<float>;
-  %template(Float64Vector) vector<double>;
-  %template(StringVector) vector<string>;
-}
-
-using namespace std;
-typedef std::vector Vector;
+%include "ortools/util/go/vector.i"
 
 // We need to forward-declare the proto here, so that the PROTO_* macros
 // involving them work correctly. The order matters very much: this declaration
