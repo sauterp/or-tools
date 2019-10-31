@@ -288,6 +288,7 @@ $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.h \
+ $(GEN_DIR)/ortools/linear_solver/build.go \
  $(GEN_DIR)/ortools/linear_solver/linear_solver.pb.h \
  $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go \
  $(PROTOBUF_GO_DESC) \
@@ -296,6 +297,10 @@ $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  -o $(GEN_PATH)$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc \
  -module gowraplp \
  $(SRC_DIR)/ortools/linear_solver$Sgo$Slinear_solver.i
+
+$(GEN_DIR)/ortools/linear_solver/build.go: \
+ $(SRC_DIR)/ortools/linear_solver/go/build.go
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild.go $(GEN_PATH)$Sortools$Slinear_solver
 
 $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
  $(GEN_DIR)/ortools/linear_solver/gowraplp.go
