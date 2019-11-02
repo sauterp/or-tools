@@ -300,7 +300,7 @@ $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
 
 $(GEN_DIR)/ortools/linear_solver/build.go: \
  $(SRC_DIR)/ortools/linear_solver/go/build.go
-	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild.go $(GEN_PATH)$Sortools$Slinear_solver
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild.go $(GEN_PATH)$Sortools$Slinear_solver$Sbuild.go
 
 $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
  $(GEN_DIR)/ortools/linear_solver/gowraplp.go

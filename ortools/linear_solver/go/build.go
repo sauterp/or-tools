@@ -10,25 +10,24 @@ package linear_solver
 #cgo CXXFLAGS: -DUSE_GLOP
 #cgo CXXFLAGS: -DUSE_BOP
 #cgo LDFLAGS: ${SRCDIR}/../../../../ortools/gen/ortools/linear_solver/_gowraplp.so
-#cgo LDFLAGS: ${SRCDIR}/../../../../dependencies/install/lib/libglog.so
 #cgo LDFLAGS: -L ${SRCDIR}/../../../../lib
 #cgo LDFLAGS: -L ${SRCDIR}/../../../../dependencies/install/lib/
+#cgo LDFLAGS: -L ${SRCDIR}/../../../../dependencies/install/lib/coin/
+#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../ortools/gen/ortools/linear_solver/
+#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../lib
+#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../dependencies/install/lib/
 #cgo LDFLAGS: -lprotobuf
 #cgo LDFLAGS: -lprotobuf-lite
 #cgo LDFLAGS: -lortools
-#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../ortools/gen/ortools/linear_solver/
-#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../dependencies/install/lib/
-#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../lib
-#cgo LDFLAGS: -Wl,-rpath ${SRCDIR}/../../../../dependencies/install/lib/
-#cgo pkg-config: --define-variable=prefix=${SRCDIR}/../../../../dependencies/install/lib/pkgconfig/
-#cgo pkg-config: cbc
-#cgo pkg-config: clp
-#cgo pkg-config: gflags
-#cgo pkg-config: osi-clp
-#cgo pkg-config: osi
-#cgo pkg-config: cgl
-#cgo pkg-config: coinutils
-#cgo pkg-config: osi-cbc
-#cgo pkg-config: osi-unittests
+#cgo LDFLAGS: -lglog
+#cgo LDFLAGS: -lcbc
+#cgo LDFLAGS: -lclp
+#cgo LDFLAGS: -lgflags
+#cgo LDFLAGS: -losiClp
+#cgo LDFLAGS: -losi
+#cgo LDFLAGS: -lcgl
+#cgo LDFLAGS: -lcoinutils
+#cgo LDFLAGS: -losiCbc
+#cgo LDFLAGS: -losiUnittests
 */
 import "C"
