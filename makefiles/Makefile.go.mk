@@ -328,7 +328,7 @@ $(OBJ_DIR)/swig/cgo_externals.$O: $(SRC_DIR)/ortools/linear_solver/go/cgo_extern
 $(OBJ_OUT)$(OBJ_DIR)$Sswig$Scgo_externals.$O
 
 $(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS)
-	$(DYNAMIC_LD) \
+	$(DYNAMIC_LD) /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def \
  $(GOLP_LDFLAGS) \
  $(OBJ_DIR)$Sswig$Scgo_externals.$O \
  $(OBJ_DIR)/swig/linear_solver_go_wrap.$O \
@@ -338,7 +338,7 @@ $(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_exter
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.dll
+	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.$(SWIG_GO_LIB_SUFFIX)
 else
 	cp $(GOLP_LIBS) $(GEN_PATH)/ortools/linear_solver
 endif
