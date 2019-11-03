@@ -2,6 +2,7 @@
 package linear_solver
 
 /*
+#cgo CXXFLAGS: -std=c++11
 #cgo CXXFLAGS: -I${SRCDIR}/../../
 #cgo CXXFLAGS: -I${SRCDIR}/../../../../
 #cgo CXXFLAGS: -I${SRCDIR}/../../../../dependencies/install/include/
@@ -9,7 +10,6 @@ package linear_solver
 #cgo CXXFLAGS: -DUSE_CBC
 #cgo CXXFLAGS: -DUSE_GLOP
 #cgo CXXFLAGS: -DUSE_BOP
-#cgo LDFLAGS: ${SRCDIR}/../../../../ortools/gen/ortools/linear_solver/_gowraplp.so
 #cgo LDFLAGS: -L ${SRCDIR}/../../../../lib
 #cgo LDFLAGS: -L ${SRCDIR}/../../../../dependencies/install/lib/
 #cgo LDFLAGS: -L ${SRCDIR}/../../../../dependencies/install/lib/coin/

@@ -28,7 +28,7 @@ GO_EXECUTABLE := $(shell which $(GO_COMPILER))
 SET_GOPATH = GOPATH=$(OR_TOOLS_GOPATH) # TODO set the correct GOPATH
 endif
 
-SWIG_GO_FLAG := -intgosize 64 -package linear_solver
+SWIG_GO_FLAG := -intgosize 64 -package linear_solver -c++ -go
 
 # All libraries and dependecies
 GOALGORITHMS_LIBS = $(LIB_DIR)/_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX)
@@ -45,7 +45,6 @@ GOSORTED_INTERVAL_LIST_LIBS = $(LIB_DIR)/_sorted_interval_list.$(SWIG_GO_LIB_SUF
 #  $(GOALGORITHMS_LIBS) \
 #  $(GOGRAPH_LIBS) \
 #  $(GOCP_LIBS) \
-#  $(GOLP_LIBS) \
 #  $(GOSAT_LIBS) \
 #  $(GODATA_LIBS) \
 #  $(GOSORTED_INTERVAL_LIST_LIBS)
@@ -88,7 +87,7 @@ $(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go: \
  $(SRC_DIR)/ortools/algorithms/knapsack_solver.h \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/algorithms
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
  -o $(GEN_PATH)$Sortools$Salgorithms$Sknapsack_solver_go_wrap.cc \
  -module gowrapknapsack_solver \
  ortools$Salgorithms$Sgo$Sknapsack_solver.i
@@ -134,7 +133,7 @@ $(GEN_DIR)/ortools/graph/gowrapgraph.go: \
  $(SRC_DIR)/ortools/graph/shortestpaths.h \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/graph
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_FLAG) \
  -o $(GEN_PATH)$Sortools$Sgraph$Sgraph_go_wrap.cc \
  -module gowrapgraph \
  ortools$Sgraph$Sgo$Sgraph.i
@@ -224,7 +223,7 @@ $(GEN_DIR)/ortools/constraint_solver/gowrapcp.go: \
  $(CP_LIB_OBJS) \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/constraint_solver
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go -nofastunpack $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -nofastunpack $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
  -o $(GEN_PATH)$Sortools$Sconstraint_solver$Sconstraint_solver_go_wrap.cc \
  -module gowrapcp \
  $(SRC_DIR)/ortools/constraint_solver$Sgo$Srouting.i
@@ -258,7 +257,7 @@ $(GOCP_LIBS): $(OBJ_DIR)/swig/constraint_solver_go_wrap.$O $(OR_TOOLS_LIBS)
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowrapcp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\constraint_solver\\_gowrapcp.pyd
+	copy $(LIB_DIR)$S_gowrapcp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\constraint_solver\\_gowrapcp.dll
 else
 	cp $(GOCP_LIBS) $(GEN_PATH)/ortools/constraint_solver
 endif
@@ -288,42 +287,58 @@ $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  $(SRC_DIR)/ortools/util/go/vector.i \
  $(SRC_DIR)/ortools/linear_solver/go/linear_solver.i \
  $(SRC_DIR)/ortools/linear_solver/linear_solver.h \
- $(GEN_DIR)/ortools/linear_solver/build.go \
+ $(GEN_DIR)/ortools/linear_solver/build_linux.go \
+ $(GEN_DIR)/ortools/linear_solver/build_windows.go \
  $(GEN_DIR)/ortools/linear_solver/linear_solver.pb.h \
  $(GEN_DIR)/ortools/linear_solver/linear_solver_pb2.go \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/linear_solver
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_FLAG) $(SWIG_GO_DOXYGEN) \
  -o $(GEN_PATH)$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc \
  -module gowraplp \
  $(SRC_DIR)/ortools/linear_solver$Sgo$Slinear_solver.i
 
-$(GEN_DIR)/ortools/linear_solver/build.go: \
- $(SRC_DIR)/ortools/linear_solver/go/build.go
-	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild.go $(GEN_PATH)$Sortools$Slinear_solver$Sbuild.go
+$(GEN_DIR)/ortools/linear_solver/build_linux.go: \
+ $(SRC_DIR)/ortools/linear_solver/go/build_linux.go
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild_linux.go $(GEN_PATH)$Sortools$Slinear_solver$Sbuild_linux.go
+
+$(GEN_DIR)/ortools/linear_solver/build_windows.go: \
+ $(SRC_DIR)/ortools/linear_solver/go/build_windows.go
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild_windows.go $(GEN_PATH)$Sortools$Slinear_solver$Sbuild_windows.go
 
 $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
  $(GEN_DIR)/ortools/linear_solver/gowraplp.go
 
+$(GEN_DIR)/ortools/linear_solver/macro_linear_solver_go_wrap.cc: \
+ $(SRC_DIR)/ortools/linear_solver/go/macro_linear_solver_go_wrap.cc
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Smacro_linear_solver_go_wrap.cc $(GEN_PATH)$Sortools$Slinear_solver$Smacro_linear_solver_go_wrap.cc
+
 $(OBJ_DIR)/swig/linear_solver_go_wrap.$O: \
+ $(GEN_DIR)/ortools/linear_solver/macro_linear_solver_go_wrap.cc \
  $(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc \
  $(LP_DEPS) \
- | $(OBJ_DIR)/swig
+| $(OBJ_DIR)/swig
 	$(CCC) $(CFLAGS) $(GO_INC) $(GO_CFLAGS) \
- -c $(GEN_PATH)$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc \
- $(OBJ_OUT)$(OBJ_DIR)$Sswig$Slinear_solver_go_wrap.$O
+-c $(GEN_PATH)$Sortools$Slinear_solver$Smacro_linear_solver_go_wrap.cc \
+$(OBJ_OUT)$(OBJ_DIR)$Sswig$Slinear_solver_go_wrap.$O
 
-$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OR_TOOLS_LIBS)
+$(OBJ_DIR)/swig/cgo_externals.$O: $(SRC_DIR)/ortools/linear_solver/go/cgo_externals.cc
+	$(CCC) $(CFLAGS) $(GO_INC) $(GO_CFLAGS) \
+-c $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Scgo_externals.cc \
+$(OBJ_OUT)$(OBJ_DIR)$Sswig$Scgo_externals.$O
+
+$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS)
 	$(DYNAMIC_LD) \
  $(GOLP_LDFLAGS) \
+ $(OBJ_DIR)$Sswig$Scgo_externals.$O \
+ $(OBJ_DIR)/swig/linear_solver_go_wrap.$O \
  $(LD_OUT)$(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) \
- $(OBJ_DIR)$Sswig$Slinear_solver_go_wrap.$O \
  $(OR_TOOLS_LNK) \
  $(SYS_LNK) \
  $(GO_LNK) \
  $(GO_LDFLAGS)
 ifeq ($(SYSTEM),win)
-	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.pyd
+	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.dll
 else
 	cp $(GOLP_LIBS) $(GEN_PATH)/ortools/linear_solver
 endif
@@ -356,7 +371,7 @@ $(GEN_DIR)/ortools/sat/gowrapsat.go: \
  $(SAT_DEPS) \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/sat
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_FLAG) \
  -o $(GEN_PATH)$Sortools$Ssat$Ssat_go_wrap.cc \
  -module gowrapsat \
  $(SRC_DIR)/ortools/sat$Sgo$Ssat.i
@@ -407,7 +422,7 @@ $(GEN_DIR)/ortools/data/gowraprcpsp.go: \
  $(DATA_DEPS) \
  $(PROTOBUF_GO_DESC) \
  | $(GEN_DIR)/ortools/data
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_FLAG) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_FLAG) \
  -o $(GEN_PATH)$Sortools$Sdata$Srcpsp_go_wrap.cc \
  -module gowraprcpsp \
  $(SRC_DIR)/ortools/data$Sgo$Srcpsp.i
@@ -450,7 +465,7 @@ $(GEN_DIR)/ortools/util/sorted_interval_list.go: \
  $(SRC_DIR)/ortools/util/go/sorted_interval_list.i \
  $(UTIL_DEPS) \
  | $(GEN_DIR)/ortools/util
-	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) -c++ -go $(SWIG_GO_DOXYGEN) $(SWIG_GO_FLAG) \
+	$(SWIG_BINARY) $(SWIG_INC) -I$(INC_DIR) $(SWIG_GO_DOXYGEN) $(SWIG_GO_FLAG) \
  -o $(GEN_PATH)$Sortools$Sutil$Ssorted_interval_list_go_wrap.cc \
  -module sorted_interval_list \
  $(SRC_DIR)$Sortools$Sutil$Sgo$Ssorted_interval_list.i
