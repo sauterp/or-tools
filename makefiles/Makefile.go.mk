@@ -12,10 +12,13 @@ else
 endif
 
 OR_TOOLS_GOPATH = $(OR_ROOT_FULL)$(CPSEP)$(OR_ROOT_FULL)$Sdependencies$Ssources$Sprotobuf-$(PROTOBUF_TAG)$Sgo
+GO_INSTALLPATH := $(shell go env GOPATH)$Ssrc$Sgithub.com$Ssauterp$Sortoolslp
 
 # Check for required build tools
 ifeq ($(SYSTEM),win)
 GO_COMPILER ?= go.exe
+GO_LNK :=  /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def
+MKDIR_P := mkdir
 ifneq ($(WINDOWS_PATH_TO_GO),)
 GO_EXECUTABLE := $(WINDOWS_PATH_TO_GO)\$(GO_COMPILER)
 else
@@ -26,6 +29,7 @@ else # UNIX
 GO_COMPILER ?= go
 GO_EXECUTABLE := $(shell which $(GO_COMPILER))
 SET_GOPATH = GOPATH=$(OR_TOOLS_GOPATH) # TODO set the correct GOPATH
+MKDIR_P := mkdir -p
 endif
 
 SWIG_GO_FLAG := -intgosize 64 -package linear_solver -c++ -go
@@ -327,8 +331,8 @@ $(OBJ_DIR)/swig/cgo_externals.$O: $(SRC_DIR)/ortools/linear_solver/go/cgo_extern
 -c $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Scgo_externals.cc \
 $(OBJ_OUT)$(OBJ_DIR)$Sswig$Scgo_externals.$O
 
-$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS)
-	$(DYNAMIC_LD) /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def \
+$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS) $(SRC_DIR)/ortools/linear_solver/go/_gowraplp.def
+	$(DYNAMIC_LD) \
  $(GOLP_LDFLAGS) \
  $(OBJ_DIR)$Sswig$Scgo_externals.$O \
  $(OBJ_DIR)/swig/linear_solver_go_wrap.$O \
@@ -562,7 +566,8 @@ clean_go:
 # TODO add dependencies for target install_go
 .PHONY: install_go # Install Go OR-Tools on the host system
 install_go:
-	cd $(GEN_DIR)/ortools/linear_solver/ && go install
+	$(MKDIR_P) $(GO_INSTALLPATH)
+	$(COPY) $(GEN_DIR)$Sortools$Slinear_solver$S* $(GO_INSTALLPATH)
 
 # TODO implement this
 .PHONY: uninstall_go # Uninstall Go OR-Tools from the host system
