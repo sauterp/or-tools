@@ -19,6 +19,7 @@ ifeq ($(SYSTEM),win)
 GO_COMPILER ?= go.exe
 GO_LNK :=  /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def
 MKDIR_P := mkdir
+COPY_R := xcopy /s /e
 ifneq ($(WINDOWS_PATH_TO_GO),)
 GO_EXECUTABLE := $(WINDOWS_PATH_TO_GO)\$(GO_COMPILER)
 else
@@ -30,6 +31,7 @@ GO_COMPILER ?= go
 GO_EXECUTABLE := $(shell which $(GO_COMPILER))
 SET_GOPATH = GOPATH=$(OR_TOOLS_GOPATH) # TODO set the correct GOPATH
 MKDIR_P := mkdir -p
+COPY_R := cp -r
 endif
 
 SWIG_GO_FLAG := -intgosize 64 -package linear_solver -c++ -go
@@ -567,7 +569,24 @@ clean_go:
 .PHONY: install_go # Install Go OR-Tools on the host system
 install_go:
 	$(MKDIR_P) $(GO_INSTALLPATH)
-	$(COPY) $(GEN_DIR)$Sortools$Slinear_solver$S* $(GO_INSTALLPATH)
+	$(COPY) $(GEN_DIR)$Sortools$Slinear_solver$S*.go $(GO_INSTALLPATH)
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sortools$Sgen$Sortools$Slinear_solver
+	$(COPY) $(GEN_DIR)$Sortools$Slinear_solver$S* $(GO_INSTALLPATH)$Sortools$Sgen$Sortools$Slinear_solver$S
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild_installed_linux.go $(GO_INSTALLPATH)$Sbuild_linux.go
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sortools$Slinear_solver
+	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$S*.h $(GO_INSTALLPATH)$Sortools$Slinear_solver$S
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sdependencies$Sinstall$Sinclude
+	$(COPY_R) $(SRC_DIR)$Sdependencies$Sinstall$Sinclude$S* $(GO_INSTALLPATH)$Sdependencies$Sinstall$Sinclude$S
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sortools$Sutil
+	$(COPY) $(GEN_DIR)$Sortools$Sutil$S*.h $(GO_INSTALLPATH)$Sortools$Sutil$S
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sortools$Sbase
+	$(COPY) $(SRC_DIR)$Sortools$Sbase$S*.h $(GO_INSTALLPATH)$Sortools$Sbase$S
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sortools$Sport
+	$(COPY) $(SRC_DIR)$Sortools$Sport$S* $(GO_INSTALLPATH)$Sortools$Sport$S
+	$(MKDIR_P) $(GO_INSTALLPATH)$Slib
+	$(MKDIR_P) $(GO_INSTALLPATH)$Sdependencies$Sinstall
+	$(COPY) $(SRC_DIR)$Slib$S* $(GO_INSTALLPATH)$Slib$S
+	$(COPY_R) $(SRC_DIR)$Sdependencies$Sinstall$Slib $(GO_INSTALLPATH)$Sdependencies$Sinstall$S
 
 # TODO implement this
 .PHONY: uninstall_go # Uninstall Go OR-Tools from the host system
