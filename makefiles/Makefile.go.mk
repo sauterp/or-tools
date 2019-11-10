@@ -56,7 +56,7 @@ GOSORTED_INTERVAL_LIST_LIBS = $(LIB_DIR)/_sorted_interval_list.$(SWIG_GO_LIB_SUF
 #  $(GOSORTED_INTERVAL_LIST_LIBS)
 
 GO_OR_TOOLS_LIBS = \
- $(GEN_DIR)/ortools/ \
+ $(GEN_DIR)/ortools/linear_solver/ \
  $(GOLP_LIBS)
 
 # Main target
@@ -85,6 +85,9 @@ endif
 ifeq ($(PLATFORM),MACOSX)
 GOALGORITHMS_LDFLAGS = -install_name @rpath/_gowrapknapsack_solver.$(SWIG_GO_LIB_SUFFIX) #
 endif
+
+$(GEN_DIR)/ortools/linear_solver/:
+	$(MKDIR_P) $(GEN_DIR)/ortools/linear_solver
 
 $(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go: \
  $(SRC_DIR)/ortools/base/base.i \

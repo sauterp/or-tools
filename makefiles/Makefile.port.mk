@@ -26,7 +26,7 @@ ifeq ($(SYSTEM),unix)
     DETECTED_PYTHON_VERSION := $(UNIX_PYTHON_VER)
   endif
 
-  ifeq ($(OS),Linux)
+  ifeq ($(OS),$(filter $(OS),Linux FreeBSD))
     PLATFORM = LINUX
     CODEPORT = OpSys-Linux
     LBITS = $(shell getconf LONG_BIT)
