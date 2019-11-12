@@ -17,7 +17,9 @@ GO_INSTALLPATH := $(shell go env GOPATH)$Ssrc$Sgithub.com$Ssauterp$Sortoolslp
 # Check for required build tools
 ifeq ($(SYSTEM),win)
 GO_COMPILER ?= go.exe
-GO_LNK :=  /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def
+WINDOWS_SED_DLLEXPORT := $(OR_ROOT_FULL)\tools\win\sed.exe -i "s/.*_wrap_/__declspec\(dllexport\) &/" $(OR_ROOT_FULL)$Sortools$Sgen$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc
+#> $(OR_ROOT_FULL)$Sortools$Sgen$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc
+#GO_LNK :=  /DEF:$(SRC_DIR)\\ortools\\linear_solver\\go\\_gowraplp.def
 MKDIR_P := mkdir
 COPY_R := xcopy /s /e
 ifneq ($(WINDOWS_PATH_TO_GO),)
@@ -87,7 +89,8 @@ GOALGORITHMS_LDFLAGS = -install_name @rpath/_gowrapknapsack_solver.$(SWIG_GO_LIB
 endif
 
 $(GEN_DIR)/ortools/linear_solver/:
-	$(MKDIR_P) $(GEN_DIR)/ortools/linear_solver
+	
+#$(MKDIR_P) $(GEN_DIR)$Sortools$Slinear_solver
 
 $(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go: \
  $(SRC_DIR)/ortools/base/base.i \
@@ -306,6 +309,7 @@ $(GEN_DIR)/ortools/linear_solver/gowraplp.go: \
  -o $(GEN_PATH)$Sortools$Slinear_solver$Slinear_solver_go_wrap.cc \
  -module gowraplp \
  $(SRC_DIR)/ortools/linear_solver$Sgo$Slinear_solver.i
+	$(WINDOWS_SED_DLLEXPORT)
 
 $(GEN_DIR)/ortools/linear_solver/build_linux.go: \
  $(SRC_DIR)/ortools/linear_solver/go/build_linux.go
@@ -315,12 +319,12 @@ $(GEN_DIR)/ortools/linear_solver/build_windows.go: \
  $(SRC_DIR)/ortools/linear_solver/go/build_windows.go
 	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Sbuild_windows.go $(GEN_PATH)$Sortools$Slinear_solver$Sbuild_windows.go
 
-$(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
- $(GEN_DIR)/ortools/linear_solver/gowraplp.go
-
 $(GEN_DIR)/ortools/linear_solver/macro_linear_solver_go_wrap.cc: \
  $(SRC_DIR)/ortools/linear_solver/go/macro_linear_solver_go_wrap.cc
 	$(COPY) $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Smacro_linear_solver_go_wrap.cc $(GEN_PATH)$Sortools$Slinear_solver$Smacro_linear_solver_go_wrap.cc
+
+$(GEN_DIR)/ortools/linear_solver/linear_solver_go_wrap.cc: \
+ $(GEN_DIR)/ortools/linear_solver/gowraplp.go
 
 $(OBJ_DIR)/swig/linear_solver_go_wrap.$O: \
  $(GEN_DIR)/ortools/linear_solver/macro_linear_solver_go_wrap.cc \
@@ -336,7 +340,8 @@ $(OBJ_DIR)/swig/cgo_externals.$O: $(SRC_DIR)/ortools/linear_solver/go/cgo_extern
 -c $(SRC_DIR)$Sortools$Slinear_solver$Sgo$Scgo_externals.cc \
 $(OBJ_OUT)$(OBJ_DIR)$Sswig$Scgo_externals.$O
 
-$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS) $(SRC_DIR)/ortools/linear_solver/go/_gowraplp.def
+#$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS) $(SRC_DIR)/ortools/linear_solver/go/_gowraplp.def
+$(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_externals.$O $(OR_TOOLS_LIBS)
 	$(DYNAMIC_LD) \
  $(GOLP_LDFLAGS) \
  $(OBJ_DIR)$Sswig$Scgo_externals.$O \

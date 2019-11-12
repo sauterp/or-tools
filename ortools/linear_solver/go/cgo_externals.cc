@@ -3,7 +3,7 @@ extern "C" {
 #endif
 
 #ifndef __GNUC__
-#define
+#define true 1 // necessary to resolve error C2007: #define syntax with cl compiler
 __declspec(dllexport) void (*crosscall2_ptr)(void (*fn)(void *, int), void *, int);
 void crosscall2(void (*fn)(void *, int), void * void_ptr, int someInt) {
 	crosscall2_ptr(fn, void_ptr, someInt); 

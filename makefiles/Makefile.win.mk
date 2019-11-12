@@ -19,7 +19,7 @@ STATIC_LINK_CMD = lib
 # C++ relevant directory
 INC_DIR = $(OR_ROOT).
 SRC_DIR = $(OR_ROOT).
-GEN_DIR = $(OR_ROOT)ortools/gen
+GEN_DIR = $(OR_ROOT)ortools$Sgen
 GEN_PATH = $(subst /,$S,$(GEN_DIR))
 OBJ_DIR = $(OR_ROOT)objs
 LIB_DIR = $(OR_ROOT)lib
