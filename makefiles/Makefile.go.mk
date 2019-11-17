@@ -350,7 +350,7 @@ $(GOLP_LIBS): $(OBJ_DIR)/swig/linear_solver_go_wrap.$O $(OBJ_DIR)/swig/cgo_exter
  $(OR_TOOLS_LNK) \
  $(SYS_LNK) \
  $(GO_LNK) \
- $(GO_LDFLAGS)
+ $(GO_LDFLAGS) /DELAYLOAD:scip.dll /DELAYLOAD:cplex1290.dll /DELAYLOAD:gurobi$(GUROBI_LIB_VERSION).dll /DELAYLOAD:glpk$(GLPK_LIB_VERSION_POSTFIX).dll Delayimp.lib
 ifeq ($(SYSTEM),win)
 	copy $(LIB_DIR)$S_gowraplp.$(SWIG_GO_LIB_SUFFIX) $(GEN_PATH)\\ortools\\linear_solver\\_gowraplp.$(SWIG_GO_LIB_SUFFIX)
 else

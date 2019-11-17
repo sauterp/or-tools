@@ -107,10 +107,10 @@ PYTHON_LNK="$(WINDOWS_PATH_TO_PYTHON)\\libs\\python$(PYTHON_VERSION).lib"
 
 # This is needed to find GLPK include files and libraries.
 ifdef WINDOWS_GLPK_DIR
-GLPK_INC = /I"$(WINDOWS_GLPK_DIR)\\include" /DUSE_GLPK
-GLPK_SWIG = -I"$(WINDOWS_GLPK_DIR)/include" -DUSE_GLPK
-DYNAMIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\lib\\glpk.lib"
-STATIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\lib\\glpk.lib"
+GLPK_INC = /I"$(WINDOWS_GLPK_DIR)\\src" /DUSE_GLPK
+GLPK_SWIG = -I"$(WINDOWS_GLPK_DIR)/src" -DUSE_GLPK
+DYNAMIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\w64\\glpk$(GLPK_LIB_VERSION_POSTFIX).lib"
+STATIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\w64\\glpk$(GLPK_LIB_VERSION_POSTFIX).lib"
 endif
 # This is needed to find SCIP include files and libraries.
 ifdef WINDOWS_SCIP_DIR
