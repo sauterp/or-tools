@@ -89,8 +89,7 @@ GOALGORITHMS_LDFLAGS = -install_name @rpath/_gowrapknapsack_solver.$(SWIG_GO_LIB
 endif
 
 $(GEN_DIR)/ortools/linear_solver/:
-	
-#$(MKDIR_P) $(GEN_DIR)$Sortools$Slinear_solver
+	$(MKDIR_P) $(GEN_DIR)$Sortools$Slinear_solver
 
 $(GEN_DIR)/ortools/algorithms/gowrapknapsack_solver.go: \
  $(SRC_DIR)/ortools/base/base.i \
