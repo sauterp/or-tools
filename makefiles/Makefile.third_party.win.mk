@@ -179,12 +179,12 @@ Makefile.local: makefiles/Makefile.third_party.$(SYSTEM).mk
 	@echo # >> Makefile.local
 	@echo # Some configuration examples: >> Makefile.local
 	@echo # WINDOWS_CPLEX_DIR=c:\CPLEX_Studio_Community129\cplex\lib\x64_windows_vs2017\stat_mdd >> Makefile.local
-  @echo # WINDOWS_SCIP_DIR=c:\SCIPOptSuite-6.0.2 >> Makefile.local
-  @echo # GUROBI_LIB_VERSION=81 >> Makefile.local
-  @echo # WINDOWS_GUROBI_DIR=c:\gurobi811 >> Makefile.local
-  @echo # GLPK_LIB_VERSION_POSTFIX=_4_65 >> Makefile.local
-  @echo # WINDOWS_GLPK_DIR=c:\glpk-4.65 >> Makefile.local
-  @echo # >> Makefile.local
+	@echo # WINDOWS_SCIP_DIR=c:\SCIPOptSuite-6.0.2 >> Makefile.local
+	@echo # GUROBI_LIB_VERSION=81 >> Makefile.local
+	@echo # WINDOWS_GUROBI_DIR=c:\gurobi811 >> Makefile.local
+	@echo # GLPK_LIB_VERSION_POSTFIX=_4_65 >> Makefile.local
+	@echo # WINDOWS_GLPK_DIR=c:\glpk-4.65 >> Makefile.local
+	@echo # >> Makefile.local
 	@echo # Define WINDOWS_SCIP_DIR to point to a installation directory of the scip binary packaged to use it >> Makefile.local
 	@echo #   e.g.: WINDOWS_SCIP_DIR = "relative_path/to/scip-6.0.2" >> Makefile.local
 	@echo # Define WINDOWS_GUROBI_DIR and GUROBI_LIB_VERSION to use Gurobi >> Makefile.local
