@@ -53,7 +53,7 @@ $(TEMP_DOTNET_DIR):
 ifeq ($(OS),Windows)
 RUNTIME_IDENTIFIER=win-x64
 else
-  ifeq ($(OS),Linux)
+  ifeq ($(OS),$(filter $(OS),Linux FreeBSD))
   RUNTIME_IDENTIFIER=linux-x64
   else
     ifeq ($(OS),Darwin)

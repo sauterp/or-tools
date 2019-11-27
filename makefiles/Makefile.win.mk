@@ -8,6 +8,7 @@ PRE_LIB = $(OR_ROOT)lib\\
 POST_LIB = .lib
 LIB_SUFFIX = lib
 SWIG_PYTHON_LIB_SUFFIX = dll
+SWIG_GO_LIB_SUFFIX = dll
 SWIG_DOTNET_LIB_SUFFIX = dll
 JNI_LIB_EXT = dll
 STATIC_PRE_LIB = $(OR_ROOT)lib\\
@@ -18,7 +19,7 @@ STATIC_LINK_CMD = lib
 # C++ relevant directory
 INC_DIR = $(OR_ROOT).
 SRC_DIR = $(OR_ROOT).
-GEN_DIR = $(OR_ROOT)ortools/gen
+GEN_DIR = $(OR_ROOT)ortools$Sgen
 GEN_PATH = $(subst /,$S,$(GEN_DIR))
 OBJ_DIR = $(OR_ROOT)objs
 LIB_DIR = $(OR_ROOT)lib
@@ -106,10 +107,10 @@ PYTHON_LNK="$(WINDOWS_PATH_TO_PYTHON)\\libs\\python$(PYTHON_VERSION).lib"
 
 # This is needed to find GLPK include files and libraries.
 ifdef WINDOWS_GLPK_DIR
-GLPK_INC = /I"$(WINDOWS_GLPK_DIR)\\include" /DUSE_GLPK
-GLPK_SWIG = -I"$(WINDOWS_GLPK_DIR)/include" -DUSE_GLPK
-DYNAMIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\lib\\glpk.lib"
-STATIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\lib\\glpk.lib"
+GLPK_INC = /I"$(WINDOWS_GLPK_DIR)\\src" /DUSE_GLPK
+GLPK_SWIG = -I"$(WINDOWS_GLPK_DIR)/src" -DUSE_GLPK
+DYNAMIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\w64\\glpk$(GLPK_LIB_VERSION_POSTFIX).lib"
+STATIC_GLPK_LNK = "$(WINDOWS_GLPK_DIR)\\w64\\glpk$(GLPK_LIB_VERSION_POSTFIX).lib"
 endif
 # This is needed to find SCIP include files and libraries.
 ifdef WINDOWS_SCIP_DIR
@@ -124,7 +125,7 @@ endif
 ifdef WINDOWS_CPLEX_DIR
   CPLEX_INC = /I"$(WINDOWS_CPLEX_DIR)\\include" /DUSE_CPLEX
   CPLEX_SWIG = -I"$(WINDOWS_CPLEX_DIR)/include" -DUSE_CPLEX
-  STATIC_CPLEX_LNK = "$(WINDOWS_CPLEX_DIR)\\cplex1290.lib"
+  STATIC_CPLEX_LNK = "$(WINDOWS_CPLEX_DIR)\\lib\\x64_windows_vs2017\\stat_mdd\\cplex1290.lib"
   DYNAMIC_CPLEX_LNK = $(STATIC_CPLEX_LNK)
 endif
 # This is needed to find Gurobi include files and libraries.
