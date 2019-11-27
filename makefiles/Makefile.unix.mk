@@ -161,6 +161,7 @@ ifeq ($(PLATFORM),LINUX)
   JNI_LIB_EXT = so
 
   SWIG_PYTHON_LIB_SUFFIX = so
+  SWIG_GO_LIB_SUFFIX = so
   SWIG_DOTNET_LIB_SUFFIX = so
   LINK_CMD = $(DYNAMIC_LD)
   PRE_LIB = -L$(OR_ROOT_FULL)/lib -l
@@ -214,6 +215,7 @@ ifeq ($(PLATFORM),MACOSX)
   JNI_LIB_EXT = jnilib
 
   SWIG_PYTHON_LIB_SUFFIX = so# To overcome a bug in Mac OS X loader.
+  SWIG_GO_LIB_SUFFIX = so # TODO this might not be necessary. Added  to imitate Python support for Go.
   SWIG_DOTNET_LIB_SUFFIX = dylib
   LINK_CMD = clang++ -dynamiclib \
  -Wl,-search_paths_first \
