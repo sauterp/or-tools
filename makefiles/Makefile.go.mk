@@ -59,6 +59,7 @@ GOSORTED_INTERVAL_LIST_LIBS = $(LIB_DIR)/_sorted_interval_list.$(SWIG_GO_LIB_SUF
 
 GO_OR_TOOLS_LIBS = \
  $(GEN_DIR)/ortools/linear_solver/ \
+ $(PROTO_DEPS) \
  $(GOLP_LIBS)
 
 # Main target
